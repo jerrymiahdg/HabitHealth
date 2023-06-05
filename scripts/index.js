@@ -1,7 +1,28 @@
-let user;
+const changeLocation = function(newLocation) {
+  window.location.href = `${window.location.href.split('/')[0]}/${newLocation}`
+}
 if (window.location.href.split("/").at(-1) == "create.html") {
 } else if (window.location.href.split("/").at(-1) == "habits.html") {
 } else if (window.location.href.split("/").at(-1) == "login.html") {
+  const loginUser = document.querySelector('#login-user')
+  const loginPass = document.querySelector('#login-pass')
+  const loginBtn = document.querySelector('#login-btn')
+  if(sessionStorage.getItem('user')) {
+    changeLocation('pages/logged-in.html')
+  } else {
+    loginBtn.addEventListener('click', function() {
+      for(let i = 1; i <= localStorage.length; i++) {
+        const currentUser = localStorage.getItem(`user-${i}`)
+        const [username, password] = currentUser.split(' ')
+        if(loginUser.value.toLowerCase() == username && loginPass.value == password) {
+          loginPass.value = ''
+          loginUser.value = ''
+          sessionStorage.setItem('user', currentUser)
+          changeLocation('pages/profile.html')
+        }
+      }
+    })
+  }
 } else if (window.location.href.split("/").at(-1) == "profile.html") {
   const profileHead = document.querySelector("#profile-head");
   const profile = document.querySelector("#profile");
@@ -20,18 +41,9 @@ if (window.location.href.split("/").at(-1) == "create.html") {
   const signupUser = document.querySelector("#signup-user");
   const signupPass = document.querySelector("#signup-pass");
   const signupBtn = document.querySelector("#signup-btn");
-  const signup = document.querySelector("#signup");
-  const noSignup = document.querySelector("#no-signup");
-  const signupHead = document.querySelector("#signup-head");
-
   if (sessionStorage.getItem("user")) {
-    signupHead.textContent = "You are logged in.";
-    noSignup.style.display = "block";
-    signup.style.display = "none";
+    changeLocation('pages/logged-in.html')
   } else {
-    signupHead.textContent = "Sign in";
-    noSignup.style.display = "none";
-    signup.style.display = "block";
     signupBtn.addEventListener("click", function () {
       if (signupUser.value.length >= 5 && signupPass.value.length >= 5) {
         localStorage.setItem(
@@ -44,9 +56,18 @@ if (window.location.href.split("/").at(-1) == "create.html") {
           "user",
           localStorage.getItem(`user-${localStorage.length}`)
         );
-        location.reload();
+        changeLocation('pages/profile.html')
       }
     });
   }
+} else if (window.location.href.split("/").at(-1) == "logged-in.html") {
+  const logoutBtn = document.querySelector('#logout-btn')
+  if(sessionStorage.getItem('user')) {
+    logoutBtn.addEventListener('click', function() {
+      sessionStorage.removeItem('user')
+      changeLocation('index.html')
+    })
+  } else {
+    changeLocation('index.html')
+  }
 }
-localStorage.clear();
