@@ -1,1 +1,102 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(208, 255, 221);
+}
+
+ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.nav {
+    background-color: rgb(127, 255, 163);
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    text-decoration: none;
+}
+
+.li-nav .a-nav {
+    font-size:25px;
+    padding: 25px;
+}
+
+.a-nav {
+    color: rgb(41, 94, 56);
+}
+
+li .btn-nav:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.234);
+}
+
+.head-a {
+    background-color: black;
+    color: rgb(127, 255, 163);
+    font-weight: 900;
+    border-radius: 75px;
+}
+
+.head-li .head-a { 
+    margin: 10px;
+    padding: 15px;
+}
+
+.page-head {
+    font-size: 50px;
+    margin: 25px;
+    color: rgb(41, 94, 56);
+}
+
+.container {
+    background-color: rgb(41, 94, 56);
+    color: rgb(208, 255, 221);
+    border-radius: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+.habit-name {
+    font-size: 75px;
+    margin: 15px;
+    font-weight: 900px;
+}
+
+.habit-description {
+    font-size: 15px;
+}
+
+.input {
+    color: rgb(41, 94, 56);
+    padding: 15px;
+    border-radius: 55px;
+    background-color: rgb(208, 255, 221);
+    margin: 15px;
+    font-size: 20px;
+    border-style: none;
+    font-family: inherit;
+    outline: none;
+}
+
+::placeholder {
+    color: rgb(113, 162, 125);
+}
+
+.btn:hover {
+    background-color: rgb(227, 255, 235);
+    cursor: pointer;
+}
