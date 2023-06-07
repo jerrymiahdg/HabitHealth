@@ -3,6 +3,27 @@ const changeLocation = function(newLocation) {
 }
 if (window.location.href.split("/").at(-1) == "create.html") {
 } else if (window.location.href.split("/").at(-1) == "habits.html") {
+  for(const habit of document.querySelectorAll('.habit-btn')) {
+    habit.addEventListener('click', habitListener(habit))
+  }
+  function habitListener(habit) {
+    return function() {
+      if(sessionStorage.getItem('user')) {
+        let sessionUser = sessionStorage.getItem('user')
+        let localUser = localStorage.getItem('user-1')
+        let i = 1
+        while(sessionUser !== localUser) {
+          i++
+          localUser = localStorage.getItem(`user-${i}`)
+        }
+        localStorage.setItem(`user-${i}`, `${localUser} ${habit.textContent.replaceAll(' ', '-')}`)
+        sessionStorage.setItem('user', localStorage.getItem(`user-${i}`))
+        console.log(`1: ${sessionStorage.getItem('user')}, 2: ${sessionUser}, 3: ${localUser}`)
+      } else {
+        changeLocation('pages/profile.html')
+      }
+    }
+  }
 } else if (window.location.href.split("/").at(-1) == "login.html") {
   const loginUser = document.querySelector('#login-user')
   const loginPass = document.querySelector('#login-pass')
@@ -71,3 +92,4 @@ if (window.location.href.split("/").at(-1) == "create.html") {
     changeLocation('index.html')
   }
 }
+console.log(localStorage)
